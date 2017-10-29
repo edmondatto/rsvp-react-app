@@ -4,7 +4,9 @@ import Guest from "./Guest";
 
 const GuestList = props =>
   <ul>
-    {props.guests.map((guest,index) =>
+    {props.guests
+      .filter(guest => !props.isFiltered || guest.isConfirmed)
+      .map((guest,index) =>
       <Guest
         name={guest.name}
         isConfirmed={guest.isConfirmed}
@@ -21,6 +23,7 @@ GuestList.propTypes = {
   toggleConfirmationAt: PropTypes.func.isRequired,
   toggleIsEditingAt: PropTypes.func.isRequired,
   setNameAt: PropTypes.func.isRequired,
+  isFiltered: PropTypes.bool.isRequired,
 };
 
 
