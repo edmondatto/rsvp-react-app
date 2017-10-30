@@ -14,10 +14,10 @@ const GuestList = props =>
         isConfirmed={guest.isConfirmed}
         isEditing={guest.isEditing}
         key={index}
-        handleConfirmation={() => props.toggleConfirmationAt(index)}
-        handleEditing={() => props.toggleIsEditingAt(index)}
-        setName={text => props.setNameAt(text, index)}
-        handleGuestRemoval={() => props.removeGuestAt(index)}
+        handleConfirmation={() => props.toggleConfirmationAt(guest.id)}
+        handleEditing={() => props.toggleIsEditingAt(guest.id)}
+        setName={text => props.setNameAt(text, guest.id)}
+        handleGuestRemoval={() => props.removeGuestAt(guest.id)}
       />)}
   </ul>;
 
