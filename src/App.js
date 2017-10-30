@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import './App.css';
 import GuestList from "./components/GuestList";
 import Counter from "./components/Counter";
+import Header from "./components/Header";
+import ConfirmedFilter from "./components/ConfirmedFilter";
 
 class App extends Component {
   state = {
@@ -23,7 +25,7 @@ class App extends Component {
       {
         name: 'Whitney',
         isConfirmed: true,
-        isEditing: true,
+        isEditing: false,
       }
     ]
   };
@@ -107,29 +109,18 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-        <header>
-          <h1>RSVP</h1>
-          <p>Making event planning fun again</p>
-          <form onSubmit={this.handleNewGuest}>
-            <input
-              type="text"
-              onChange={this.handleNameInput}
-              value={this.state.pendingGuest}
-              placeholder="Invite Someone"
-            />
-              <button type="submit" name="submit" value="submit">Submit</button>
-          </form>
-        </header>
+        <Header
+          pendingGuest={this.state.pendingGuest}
+          handleNameInput={this.handleNameInput}
+          handleNewGuest={this.handleNewGuest}
+        />
         <div className="main">
           <div>
             <h2>Invitees</h2>
-            <label>
-              <input
-                type="checkbox"
-                onChange={this.toggleFilter}
-                checked={this.state.isFiltered}
-              /> Hide those who haven't responded
-            </label>
+            <ConfirmedFilter
+              handleToggleChange={this.toggleFilter}
+              isFiltered={this.state.isFiltered}
+            />
           </div>
           <Counter
             confirmedGuests={this.getAttendingGuests()}
