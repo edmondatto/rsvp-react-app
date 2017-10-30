@@ -6,6 +6,8 @@ class App extends Component {
   state = {
     isFiltered: false,
 
+    pendingGuest: "",
+
     guests: [
       {
         name: 'Edmond',
@@ -62,6 +64,25 @@ class App extends Component {
       isFiltered: !this.state.isFiltered
     });
 
+  handleNameInput = e =>
+    this.setState({
+      pendingGuest: e.target.value
+    });
+
+  handleNewGuest = e => {
+    e.preventDefault();
+    this.setState({
+      guests: [
+        {
+          name: this.state.pendingGuest,
+          isConfirmed: false,
+          isEditing: false,
+        },
+        ...this.state.guests,
+      ],
+      pendingGuest: "",
+    })
+  };
 
   getTotalInvited = () => this.state.guests.length;
 
@@ -74,8 +95,13 @@ class App extends Component {
         <header>
           <h1>RSVP</h1>
           <p>Making event planning fun again</p>
-          <form>
-            <input type="text" value="Safia" placeholder="Invite Someone"/>
+          <form onSubmit={this.handleNewGuest}>
+            <input
+              type="text"
+              onChange={this.handleNameInput}
+              value={this.state.pendingGuest}
+              placeholder="Invite Someone"
+            />
               <button type="submit" name="submit" value="submit">Submit</button>
           </form>
         </header>
