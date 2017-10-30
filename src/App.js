@@ -84,6 +84,14 @@ class App extends Component {
     })
   };
 
+  removeGuestAt = (index) =>
+    this.setState({
+      guests: [
+        ...this.state.guests.slice(0,index),
+        ...this.state.guests.slice(index + 1)
+      ]
+    });
+
   getTotalInvited = () => this.state.guests.length;
 
   // getAttendingGuests = () => TODO
@@ -138,6 +146,7 @@ class App extends Component {
             setNameAt={this.setNameAt}
             isFiltered={this.state.isFiltered}
             guests={this.state.guests}
+            removeGuestAt={this.removeGuestAt}
           />
          </div>
       </div>
